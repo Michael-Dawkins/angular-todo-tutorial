@@ -1,0 +1,31 @@
+<!-- ng-app directive associates our todoApp application module with our DOM-->
+<html ng-app="todoApp">
+    <head>
+        <!--Angular framework-->
+        <script src="lib/angular.js"></script>
+        <!--Underscore js, a usefull javascript utility library-->
+        <script src="lib/underscore.js"></script>
+
+        <!-- Your project files-->
+        <script src="app/todoApp.js"></script>
+        <script src="app/controllers/todoMainCtrl.js"></script>
+
+        <!--project css-->
+        <link rel="stylesheet" href="app/css/style.css"/>
+
+        <!-- bootstrap css, because default browser styles look a bit dull-->
+        <link rel="stylesheet" href="app/css/bootstrap-theme.css"/>
+        <link rel="stylesheet" href="app/css/bootstrap.css"/>
+
+    </head>
+    <!-- ng-controller directive associates our controller to this DOM tree-->
+    <body ng-controller="todoMainCtrl">
+        <div id="todo-app">
+            <h1>Todos</h1>
+
+            <!-- double curly braces enables us to evaluate any model that is present
+            on out controller $scope, this should display "Hello worl" in our page-->
+            {{test}}
+        </div>
+    </body>
+</html>

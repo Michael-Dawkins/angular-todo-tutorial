@@ -1,0 +1,62 @@
+<!-- ng-app directive associates our todoApp application module with our DOM-->
+<html ng-app="todoApp">
+    <head>
+        <!--Angular framework-->
+        <script src="lib/angular.js"></script>
+
+        <!--Underscore js, a usefull javascript utility library-->
+        <script src="lib/underscore.js"></script>
+
+        <!-- Your project files-->
+        <script src="app/todoApp.js"></script>
+        <script src="app/controllers/todoMainCtrl.js"></script>
+
+        <!--project css-->
+        <link rel="stylesheet" href="app/css/style.css"/>
+
+        <!-- bootstrap css, because default browser styles look a bit dull-->
+        <link rel="stylesheet" href="app/css/bootstrap-theme.css"/>
+        <link rel="stylesheet" href="app/css/bootstrap.css"/>
+
+    </head>
+    <!-- ng-controller directive associates our controller to this DOM tree-->
+    <body ng-controller="todoMainCtrl">
+        <div id="todo-app">
+            <h1>Todos</h1>
+
+            <form class="form-inline" role="form">
+                <!-- Use ng-model directive to supply a model to an HTML input field
+                It means that any change on the field will be bound the specified model.
+                Since it uses bidirectinnal binding, any change to the model will reflect
+                in the input field, we use that to reset the field to an empty string
+                when we add a new todo-->
+                <input ng-model="newTodo.name"
+                       class="form-control"
+                        placeholder="What do you need to do?"/>
+                <!-- Use ng-click to call a function on the DOM click event,
+                Use ng-diasabled to disabled the button when the input is empty -->
+                <button ng-click="addTodo(newTodo.name)"
+                        ng-disabled="newTodo.name === ''"
+                        class="btn btn-default">
+                    Add
+                </button>
+            </form>
+
+            <!--Ng-repeat duplicates its DOM tree for each element
+            in a collection. It also create a child scope for each one
+            of the cloned DOM tree. It means they will all have access
+            to a different todo object but still have access to the
+            deleteTodo function present in their parent scope-->
+            <div ng-repeat="todo in todos">
+                <div class="todo">
+                    {{todo.name}}
+                </div>
+                <button ng-click="deleteTodo(todo.id)"
+                        class="btn btn-default delete-button">
+                    <!-- Html code for a checkmark-->
+                    &#10004;
+                </button>
+            </div>
+        </div>
+    </body>
+</html>
