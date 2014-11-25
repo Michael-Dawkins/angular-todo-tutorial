@@ -4,7 +4,7 @@ in the html, like so : <body ng-controller="todoMainCtrl">
 controller are defined using a function, this function's parameters are subject
 to dependency injection, that means for exemple that angular
 will provide you with the scope */
-todoApp.controller("todoMainCtrl", function($scope){
+todoApp.controller("todoMainCtrl", function($scope, $state, TodoModel){
     //It is a good practise to have an init function in controllers
     //and services to have a clear separation between initialization code
     //method implementations
@@ -14,26 +14,13 @@ todoApp.controller("todoMainCtrl", function($scope){
     //to expose data and functions on the scope
     //Everything that is exposed on the scope can be accessed by you templates (.html files)
     function init(){
-        $scope.todos = [
-            {
-                name: "Buy some milk",
-                id: 0
-            },
-            {
-                name: "Learn Angular.js",
-                id: 1
-            },
-            {
-                name: "Take out the dog",
-                id: 2
-            }
-        ];
-
+        $scope.todos = TodoModel.getTodos();
         $scope.newTodo = {
             name: ""
         };
         $scope.addTodo = addTodo;
         $scope.deleteTodo = deleteTodo;
+        $scope.goToDetail = goToDetail;
     }
 
     function addTodo(todoName){
@@ -59,7 +46,15 @@ todoApp.controller("todoMainCtrl", function($scope){
         //the element that satisfies our predicate, here being equals to the given id
         $scope.todos = _.reject($scope.todos, function(todo){
             return todo.id === todoId;
-        })
+        });
+        $state.go('todo');
+        $scope.selectedId = -1;
+
+    }
+
+    function goToDetail(id){
+        $state.go('todo.detail', {id: id});
+        $scope.selectedId = id;
     }
 
 });

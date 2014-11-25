@@ -19,11 +19,12 @@ todoApp.directive("todo", function(){
            todo: '=',
            //The scope will be given a deleteTodo property.
            //The name specified next to the = sign indicates the html attribute name to use
-           deleteTodo: '=onDelete'
+           deleteTodo: '=onDelete',
+           onClick: "="
        },
        //We can give a template to our directive. In this case, <todo></todo> will be replaced by
        //the following template
-       template: '<div class="todo">{{todo.name}}</div>' +
+       template: '<div class="todo" ng-click="onClick(todo.id)">{{todo.name}}</div>' +
            '<button ng-click="deleteTodo(todo.id)" class="btn btn-default delete-button">' +
            '&#10004;' +
            '</button>',

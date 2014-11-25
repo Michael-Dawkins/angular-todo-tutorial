@@ -1,0 +1,19 @@
+<form class="form-inline" role="form">
+    <input ng-model="newTodo.name"
+           class="form-control"
+           placeholder="What do you need to do?"/>
+    <button ng-click="addTodo(newTodo.name)"
+            ng-disabled="newTodo.name === ''"
+            class="btn btn-default">
+        Add
+    </button>
+</form>
+
+<div ng-repeat="todo in todos"
+     ng-class="{'selected-toto':todo.id === selectedId}">
+    <todo todo="todo"
+          on-delete="deleteTodo"
+          on-click="goToDetail"></todo>
+</div>
+
+<div ui-view></div>
