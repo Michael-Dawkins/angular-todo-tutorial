@@ -39,6 +39,7 @@ todoApp.controller("todoMainCtrl", function($scope, $state, TodoModel){
             }
         );
         $scope.newTodo.name = "";
+        TodoModel.saveTodos();
     }
 
     function deleteTodo(todoId){
@@ -49,7 +50,7 @@ todoApp.controller("todoMainCtrl", function($scope, $state, TodoModel){
         });
         $state.go('todo');
         $scope.selectedId = -1;
-
+        TodoModel.saveTodos();
     }
 
     function goToDetail(id){

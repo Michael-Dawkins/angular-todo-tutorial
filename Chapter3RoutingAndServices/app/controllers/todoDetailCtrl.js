@@ -9,6 +9,7 @@ todoApp.controller("todoDetailCtrl", function($scope, $state, TodoModel){
     }
 
     function goToMainView(){
+        TodoModel.saveTodos();
         $state.go('todo');
     }
 });

@@ -1,25 +1,17 @@
-todoApp.factory("TodoModel", function() {
+todoApp.factory("TodoModel", function($rootScope, LocalStorage) {
 
     var todos;
 
     init();
 
     function init(){
+        todos = LocalStorage.loadModel();
+        if (todos === null)
         todos = [
             {
                 name: "Buy some milk",
                 id: 0,
-                detail: "Buy some really freash milk for the cake"
-            },
-            {
-                name: "Learn Angular.js",
-                id: 1,
-                detail: "It could be really awesome"
-            },
-            {
-                name: "Take out the dog",
-                id: 2,
-                detail: "Because 42"
+                detail: "Buy some really fresh milk for the cake"
             }
         ];
     }
@@ -28,8 +20,13 @@ todoApp.factory("TodoModel", function() {
         return todos;
     }
 
+    function saveTodos(){
+        LocalStorage.saveModel(todos);
+    }
+
     return {
-        getTodos: getTodos
+        getTodos: getTodos,
+        saveTodos: saveTodos
     }
 });
 
